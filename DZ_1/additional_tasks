@@ -1,0 +1,5 @@
+#однострочник - посчитать уникальные символы в текстовом файле (вывести количество)                                                                                                                         
+cat filename | perl -ln -E '$hash{$_}++ for split // }{ print scalar keys %hash;'
+
+#однострочник - вывести список пользователей, у которых шелл - bash (смотреть файл /etc/passwd)
+cat /etc/passwd | perl -lF: -E 'print $F[0] if $F[6] =~ /bash/'
