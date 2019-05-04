@@ -25,7 +25,8 @@ sub new {
     } );
     $self->mk_aliases( sec => 'second', min => 'minute' );
     if ( ref $arg ) {
-        return undef if ref $arg != 'HASH';
+        no warnings 'uninitialized';
+        return undef if ref $arg ne 'HASH';
         $self->year(0+$arg->{'year'});
         $self->month(0+$arg->{'month'});
         $self->day(0+$arg->{'day'});
@@ -34,6 +35,7 @@ sub new {
         $self->second(0+$arg->{'second'});
     }
     elsif (defined $arg) {
+        no warnings 'uninitialized';
         $self->year(0+$arg);
         $self->month(0+$m);
         $self->day(0+$d);

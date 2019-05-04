@@ -77,7 +77,7 @@ sub from_epoch {
 sub strftime {
     my $self = shift;
     my $string_format = shift;
-    #infinite loop when call strftime without prefix POSIX:: in strftime $string_format, localtime(1555759641)
+    #infinite loop when call strftime without prefix POSIX:: in "strftime $string_format, localtime(1555759641)"
     #error when call strftime without prefix POSIX:: "Can't call method "second" without a package or object reference"
     return POSIX::strftime $string_format, $self->second, $self->minute, $self->hour, $self->day, $self->month - 1, $self->year - 1900;
 }
@@ -132,7 +132,6 @@ sub add_months {
     my $new_month = $self->month + $months;
     if ( $self->year % 4 and $new_month == 2 and $self->day == 29 ) { say join " ", "Illegal value. There is no 29 february in",  $self->year, "year"; }
     elsif ( $self->day > $month_date{$new_month} ) { say join " ", "Illegal value. There is no", $self->day, "day in",  $new_month, "month"; }
-    #29.02 leap year
     else { $self->month($new_month); }
     return 1;
 }
@@ -158,8 +157,7 @@ sub add_days {
 sub add_days_positive {
     my $self = shift;
     my $days = shift;
-    #years
-    #not necessary
+    #not necessary process years
     my $curr_year = $self->year;
     if ( $days > 365 ) {
         if ($self->day == 29 and $self->month == 2) {
